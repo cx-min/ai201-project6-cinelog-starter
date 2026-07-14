@@ -9,7 +9,7 @@ This repository is the starting point for **Project 6: Simulated Code Review**.
 ## Setup
 
 ```bash
-pip install -r requirements.txt
+ 
 python app.py
 ```
 
