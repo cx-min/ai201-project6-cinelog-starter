@@ -26,9 +26,9 @@
 **Engagement with reviewer's point:** New shows come out and it makes sense to have watchlists with newly added entries at the top. Plus, get_collection() already sorts newest-first. It's good to keep it consistent across features.
 
 ## Comment 6 — Rebase
-**What conflicted:**
-**How I resolved it:**
-**How I verified no conflict remains:**
+**What conflicted:** Rebasing onto `origin/main` surfaced a conflict in `.gitignore` — both branches had independently added one, with `main`'s missing `.pytest_cache/`. No conflict was flagged in `models.py` itself during the rebase, but the UUID refactor on `main` (Film.id changed from `db.Integer` to `db.String(36)`) meant `WatchlistEntry`, which only exists on this branch, needed its `film_id` column updated from `db.Integer` to `db.String(36)` to match the new foreign key type. This didn't surface as a git conflict since `WatchlistEntry` isn't defined on `main` at all — it was a semantic mismatch that only showed up as failing tests after the rebase completed.
+**How I resolved it:** Merged `.gitignore` to include all entries from both versions. Updated `WatchlistEntry.film_id` in `models.py` to `db.String(36)`, updated `add_to_watchlist()`'s docstring in `watchlist_service.py` to reflect `film_id` as a UUID string instead of an integer, and updated the fake ID in `test_watchlist.py`'s nonexistent-film test back to a UUID-format string to match the new schema.
+**How I verified no conflict remains:** `git status` shows a clean rebase with no unresolved conflicts. `git log --oneline origin/main..HEAD` shows a linear history with no merge commits. Full test suite (`pytest tests/ -v`) passes.
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->

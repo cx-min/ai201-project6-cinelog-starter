@@ -32,7 +32,6 @@ def add_to_collection(user_id, film_id, rating=None):
         user_id (str): UUID of the user.
         film_id (str): UUID of the film.
         rating (int, optional): Rating from 1–5. May be added later.
-
     Returns:
         CollectionEntry: The newly created entry.
 
