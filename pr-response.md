@@ -12,8 +12,8 @@
 **How I verified:** Ran the full test suite, and manually tested via curl by adding the same film twice — first call returns 201, second returns 409 instead of a duplicate row.
 
 ## Comment 3 — Missing test
-**What I did:**
-**How I verified:**
+**What I did:** Created `tests/test_watchlist.py` with `test_add_to_watchlist_nonexistent_film_raises`, modeled on `test_add_to_collection_nonexistent_film_raises` in `test_collection.py` — same fixture structure (`app`, `sample_user`, `sample_film`), same assertion pattern (`pytest.raises(FilmNotFoundError)`). Used an integer fake ID (`999999`) rather than a UUID string, since `WatchlistEntry.film_id` is still `db.Integer` at this point in the codebase (pre-rebase) — will need to revisit this once Comment 6's UUID migration is rebased in.
+**How I verified:** `pytest tests/test_watchlist.py -v` passes. Full suite (`pytest tests/ -v`) also passes.
 
 ## Comment 4 — Default visibility
 **My position:**
