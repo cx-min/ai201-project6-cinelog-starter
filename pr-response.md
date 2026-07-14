@@ -8,8 +8,8 @@
 **How I verified:** `grep -rn "save_to_watchlist" .` returned no matches. Full test suite still passes.
 
 ## Comment 2 — Deduplication
-**What I did:**
-**How I verified:**
+**What I did:** Added an `AlreadyInWatchlistError` exception and a duplicate check in `add_to_watchlist()`, following the same pattern as `add_to_collection()` — query for an existing `WatchlistEntry` before creating a new one, raise if found. Wired the new exception into `routes/watchlist.py` with a 409 response, mirroring how `AlreadyInCollectionError` is handled in `routes/collection.py`.
+**How I verified:** Ran the full test suite, and manually tested via curl by adding the same film twice — first call returns 201, second returns 409 instead of a duplicate row.
 
 ## Comment 3 — Missing test
 **What I did:**
