@@ -16,14 +16,14 @@
 **How I verified:** `pytest tests/test_watchlist.py -v` passes. Full suite (`pytest tests/ -v`) also passes.
 
 ## Comment 4 — Default visibility
-**My position:**
-**Reasoning:**
-**Tradeoff acknowledged:**
+**My position:** public=True by default is justified.
+**Reasoning:** Watchlists are ways for users to share their tastes and personal interests. Since the app is community-oriented and sharing is core to its value, it's appropriate to set watchlists to be public by default. Also, watchlists are lower-stakes than info like search history. 
+**Tradeoff acknowledged:** Users who prefer to not share are sharing by default. There is still exposure risk, just lower. Moreover, once a watchlist is shared, it has exposed to other users, and this cannot be undone by setting it to private again.
 
 ## Comment 5 — Sort order
-**My position:**
-**Reasoning:**
-**Engagement with reviewer's point:**
+**My position:** Sorting by date makes the most sense. 
+**Reasoning:** Watchlists are something built and updated over time. It feels natural to have the most recent watchlist at the top to keep track of your most current interests. 
+**Engagement with reviewer's point:** New shows come out and it makes sense to have watchlists with newly added entries at the top. Plus, get_collection() already sorts newest-first. It's good to keep it consistent across features.
 
 ## Comment 6 — Rebase
 **What conflicted:**
